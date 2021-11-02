@@ -22,7 +22,7 @@ class Calculator extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayResult: 0,
+      displayResult: "",
       displayInput: 0,
     };
     this.handleNumberClick = this.handleNumberClick.bind(this);
@@ -48,49 +48,77 @@ class Calculator extends React.Component {
   }
   handleMultiplicationClick(event) {
     this.setState((state) => {
+      if (state.displayResult) {
+        return {
+          displayInput: `${state.displayResult} * `,
+          displayResult: "",
+        };
+      }
       return {
-        displayInput: `${this.state.displayInput} * `,
+        displayInput: `${state.displayInput} * `,
       };
     });
   }
   handleMinusClick(event) {
     this.setState((state) => {
+      if (state.displayResult) {
+        return {
+          displayInput: `${state.displayResult} - `,
+          displayResult: "",
+        };
+      }
       return {
-        displayInput: `${this.state.displayInput} - `,
+        displayInput: `${state.displayInput} - `,
       };
     });
   }
   handleDevideClick(event) {
     this.setState((state) => {
+      if (state.displayResult) {
+        return {
+          displayInput: `${state.displayResult} / `,
+          displayResult: "",
+        };
+      }
       return {
-        displayInput: `${this.state.displayInput} / `,
+        displayInput: `${state.displayInput} / `,
       };
     });
   }
   handleSumClick(event) {
     this.setState((state) => {
+      if (state.displayResult) {
+        return {
+          displayInput: `${state.displayResult} + `,
+          displayResult: "",
+        };
+      }
       return {
-        displayInput: `${this.state.displayInput} +`,
+        displayInput: `${state.displayInput} + `,
       };
     });
   }
   handleClearClick(event) {
     this.setState((state) => {
       return {
-        displayResult: (this.state.displayResult = 0),
-        displayInput: (this.state.displayInput = 0),
+        displayResult: (state.displayResult = ""),
+        displayInput: (state.displayInput = 0),
       };
     });
   }
   handleEqualClick(event) {
     this.setState((state) => {
-      const array = state.displayInput.split(/(\+ | \-| \* | \/)/);
+      const array = state.displayInput.split(/(\+|\-|\*|\/)/);
+
+      if (array[array.length - 1] === " ") {
+        return;
+      }
 
       const result = somaMatriz(array);
 
       return {
         displayResult: result,
-        displayInput: this.state.displayInput,
+        displayInput: state.displayInput,
       };
     });
   }
@@ -98,7 +126,7 @@ class Calculator extends React.Component {
     return (
       <div className="Calculator">
         <div id="display">
-          <span>({this.state.displayResult})</span> {this.state.displayInput}
+          <span>{this.state.displayResult}</span> {this.state.displayInput}
         </div>
 
         <div id="allButtons">
@@ -137,7 +165,7 @@ class Calculator extends React.Component {
                 3
               </button>
             </div>
-            <div id="coluns">
+            <div>
               <button id="0" onClick={this.handleNumberClick}>
                 0
               </button>
@@ -160,7 +188,7 @@ class Calculator extends React.Component {
                 +
               </button>
             </div>
-            <div id="coluns" className="calcular">
+            <div className="calcular">
               <button id="=" onClick={this.handleEqualClick}>
                 =
               </button>
