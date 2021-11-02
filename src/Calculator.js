@@ -28,7 +28,7 @@ class Calculator extends React.Component {
     this.handleNumberClick = this.handleNumberClick.bind(this);
     this.handleMultiplicationClick = this.handleMultiplicationClick.bind(this);
     this.handleMinusClick = this.handleMinusClick.bind(this);
-    this.handleDevideClick = this.handleDevideClick.bind(this);
+    this.handleDevideClick = this.handleDivideClick.bind(this);
     this.handleSumClick = this.handleSumClick.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
     this.handleEqualClick = this.handleEqualClick.bind(this);
@@ -181,7 +181,7 @@ class Calculator extends React.Component {
               </button>
             </div>
             <div id="coluns">
-              <button id="/" onClick={this.handleDevideClick}>
+              <button id="/" onClick={this.handleDivideClick}>
                 /
               </button>
               <button id="+" onClick={this.handleSumClick}>
