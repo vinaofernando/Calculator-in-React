@@ -1,22 +1,6 @@
 import React from "react";
 
-function somaMatriz(array) {
-  for (let i = 0; i < array.length; i++) {
-    const item = array[i].trim();
-    const numeroAnterior = array[i - 1];
-    const numeroPosterior = array[i + 1];
-
-    if (item === "+") {
-      return Number(numeroAnterior) + Number(numeroPosterior);
-    } else if (item === "*") {
-      return Number(numeroAnterior) * Number(numeroPosterior);
-    } else if (item === "/") {
-      return Number(numeroAnterior) / Number(numeroPosterior);
-    } else if (item === "-") {
-      return Number(numeroAnterior) - Number(numeroPosterior);
-    }
-  }
-}
+import { calcula } from "./core";
 
 class Calculator extends React.Component {
   constructor(props) {
@@ -28,7 +12,7 @@ class Calculator extends React.Component {
     this.handleNumberClick = this.handleNumberClick.bind(this);
     this.handleMultiplicationClick = this.handleMultiplicationClick.bind(this);
     this.handleMinusClick = this.handleMinusClick.bind(this);
-    this.handleDevideClick = this.handleDivideClick.bind(this);
+    this.handleDivideClick = this.handleDivideClick.bind(this);
     this.handleSumClick = this.handleSumClick.bind(this);
     this.handleClearClick = this.handleClearClick.bind(this);
     this.handleEqualClick = this.handleEqualClick.bind(this);
@@ -72,7 +56,7 @@ class Calculator extends React.Component {
       };
     });
   }
-  handleDevideClick(event) {
+  handleDivideClick(event) {
     this.setState((state) => {
       if (state.displayResult) {
         return {
@@ -108,13 +92,7 @@ class Calculator extends React.Component {
   }
   handleEqualClick(event) {
     this.setState((state) => {
-      const array = state.displayInput.split(/(\+|\-|\*|\/)/);
-
-      if (array[array.length - 1] === " ") {
-        return;
-      }
-
-      const result = somaMatriz(array);
+      const result = calcula(state.displayInput);
 
       return {
         displayResult: result,
@@ -132,38 +110,20 @@ class Calculator extends React.Component {
         <div id="allButtons">
           <div>
             <div id="coluns">
-              <button id="7" onClick={this.handleNumberClick}>
-                7
-              </button>
-              <button id="8" onClick={this.handleNumberClick}>
-                8
-              </button>
-              <button id="9" onClick={this.handleNumberClick}>
-                9
-              </button>
+              <button onClick={this.handleNumberClick}>7</button>
+              <button onClick={this.handleNumberClick}>8</button>
+              <button onClick={this.handleNumberClick}>9</button>
             </div>
 
             <div id="coluns">
-              <button id="4" onClick={this.handleNumberClick}>
-                4
-              </button>
-              <button id="5" onClick={this.handleNumberClick}>
-                5
-              </button>
-              <button id="6" onClick={this.handleNumberClick}>
-                6
-              </button>
+              <button onClick={this.handleNumberClick}>4</button>
+              <button onClick={this.handleNumberClick}>5</button>
+              <button onClick={this.handleNumberClick}>6</button>
             </div>
             <div id="coluns">
-              <button id="1" onClick={this.handleNumberClick}>
-                1
-              </button>
-              <button id="2" onClick={this.handleNumberClick}>
-                2
-              </button>
-              <button id="3" onClick={this.handleNumberClick}>
-                3
-              </button>
+              <button onClick={this.handleNumberClick}>1</button>
+              <button onClick={this.handleNumberClick}>2</button>
+              <button onClick={this.handleNumberClick}>3</button>
             </div>
             <div>
               <button id="0" onClick={this.handleNumberClick}>
@@ -173,28 +133,16 @@ class Calculator extends React.Component {
           </div>
           <div id="operators">
             <div id="coluns">
-              <button id="*" onClick={this.handleMultiplicationClick}>
-                *
-              </button>
-              <button id="-" onClick={this.handleMinusClick}>
-                -
-              </button>
+              <button onClick={this.handleMultiplicationClick}>*</button>
+              <button onClick={this.handleMinusClick}>-</button>
             </div>
             <div id="coluns">
-              <button id="/" onClick={this.handleDivideClick}>
-                /
-              </button>
-              <button id="+" onClick={this.handleSumClick}>
-                +
-              </button>
+              <button onClick={this.handleDivideClick}>/</button>
+              <button onClick={this.handleSumClick}>+</button>
             </div>
             <div className="calcular">
-              <button id="=" onClick={this.handleEqualClick}>
-                =
-              </button>
-              <button id="c" onClick={this.handleClearClick}>
-                C
-              </button>
+              <button onClick={this.handleEqualClick}>=</button>
+              <button onClick={this.handleClearClick}>C</button>
             </div>
           </div>
         </div>
