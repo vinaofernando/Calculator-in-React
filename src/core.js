@@ -21,7 +21,8 @@ export function calcula(input) {
     return;
   }
 
-  const queue = [];
+  const result = [];
+
   const signal = [];
 
   for (let i = 0; i < array.length; i++) {
@@ -32,22 +33,23 @@ export function calcula(input) {
       signal.push(item);
     } else {
       if (signal.length && ehPrioridade(signal[signal.length - 1])) {
-        const a = queue.pop();
+        const a = result.pop();
         const operador = signal.pop();
         const b = item;
-        queue.push(operacao(a, operador, b));
+        result.push(operacao(a, operador, b));
       } else {
-        queue.push(Number(item));
+        result.push(Number(item));
       }
     }
   }
 
   while (signal.length) {
-    const b = queue.pop();
-    const a = queue.pop();
+    const b = result.pop();
+    const a = result.pop();
     const operador = signal.pop();
-    queue.push(operacao(a, operador, b));
+    result.push(operacao(a, operador, b));
   }
+  console.log(result);
 
-  return queue[0];
+  return result[0];
 }
