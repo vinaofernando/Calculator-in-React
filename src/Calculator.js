@@ -103,24 +103,24 @@ class Calculator extends React.Component {
   render() {
     return (
       <div className="Calculator">
-        <div id="display">
+        <div className="display">
           <span>{this.state.displayResult}</span> {this.state.displayInput}
         </div>
 
-        <div id="allButtons">
+        <div className="allButtons">
           <div>
-            <div id="coluns">
+            <div className="coluns">
               <button onClick={this.handleNumberClick}>7</button>
               <button onClick={this.handleNumberClick}>8</button>
               <button onClick={this.handleNumberClick}>9</button>
             </div>
 
-            <div id="coluns">
+            <div className="coluns">
               <button onClick={this.handleNumberClick}>4</button>
               <button onClick={this.handleNumberClick}>5</button>
               <button onClick={this.handleNumberClick}>6</button>
             </div>
-            <div id="coluns">
+            <div className="coluns">
               <button onClick={this.handleNumberClick}>1</button>
               <button onClick={this.handleNumberClick}>2</button>
               <button onClick={this.handleNumberClick}>3</button>
@@ -131,12 +131,12 @@ class Calculator extends React.Component {
               </button>
             </div>
           </div>
-          <div id="operators">
-            <div id="coluns">
+          <div className="operators">
+            <div className="coluns">
               <button onClick={this.handleMultiplicationClick}>*</button>
               <button onClick={this.handleMinusClick}>-</button>
             </div>
-            <div id="coluns">
+            <div className="coluns">
               <button onClick={this.handleDivideClick}>/</button>
               <button onClick={this.handleSumClick}>+</button>
             </div>
